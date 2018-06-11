@@ -18,5 +18,5 @@ Route::resource("account","AccountsController");
 Route::resource("user", "UsersController");
 Route::resource("product","ProductsController");
 Route::get('/hero' ,function (){
-    echo 'hello';
+    return view('account');
 });
