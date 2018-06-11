@@ -17,6 +17,4 @@ Route::get('/', function () {
 Route::resource("account","AccountsController");
 Route::resource("user", "UsersController");
 Route::resource("product","ProductsController");
-Route::get('/hero' ,function (){
-    return view('account');
-});
+Route::get('/demo','AccountsController@index');
