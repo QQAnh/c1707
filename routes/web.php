@@ -18,5 +18,5 @@ Route::resource("account","AccountsController");
 Route::resource("user", "UsersController");
 Route::resource("product","ProductsController");
 Route::get('/', function () {
-    return view('demo');
+    return view('account');
 });
