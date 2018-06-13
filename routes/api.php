@@ -39,3 +39,11 @@ Route::get('/user/{id}', function (Request $request, $id) {
     $entries = \App\User::find($id);
     return response()->json($entries, 200);
 });
+Route::get('/user/destroy/{id}', function ($id) {
+    \App\User::destroy($id);
+    return "destroy";
+
+});
+
+
+
