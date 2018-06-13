@@ -18,5 +18,6 @@ Route::resource("account","AccountsController");
 Route::resource("user", "UsersController");
 Route::resource("product","ProductsController");
 Route::get('account', function () {
+
     return App\Account::all();
 });
