@@ -13,31 +13,27 @@ class AccountsTableSeeder extends Seeder
     {
         DB::table('accounts')->insert([
             [
-                'Username' => 'xuanhung1',
-                'Password' => '123456',
-                'Salt'=>'',
-                'Status'=>1 ,
+                'username' => 'xuanhung1',
+                'password' => '123456',
+                'salt'=>'',
 
             ],[
 
-                'Username' => 'xuanhung2',
-                'Password' => '123456',
-                'Salt'=>'',
-                'Status'=>1 ,
+                'username' => 'xuanhung2',
+                'password' => '123456',
+                'salt'=>'',
 
             ],[
 
-                'Username' => 'xuanhung3',
-                'Password' => '123456',
-                'Salt'=>'',
-                'Status'=>1 ,
+                'username' => 'xuanhung3',
+                'password' => '123456',
+                'salt'=>'',
 
             ],[
 
-                'Username' => 'xuanhung4',
-                'Password' => '123456',
-                'Salt'=>'',
-                'Status'=>1 ,
+                'username' => 'xuanhung4',
+                'password' => '123456',
+                'salt'=>'',
             ],
         ]);
     }

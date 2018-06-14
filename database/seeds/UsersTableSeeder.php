@@ -13,32 +13,24 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'Fullname' => 'Hoàng Quỳnh Anh',
-                'Date_of_Birth' => '01/07/1999',
-                'Email'=>'hoangquynhanh@gmail.com',
-                'Phone'=>'012321313',
-                'Address'=>'Hà nội ',
+                'fullname' => 'Hoàng Quỳnh Anh',
+                'email'=>'hoangquynhanh@gmail.com',
+                'phone'=>'012321313',
 
             ],[
-                'Fullname' => 'Nguyễn Văn Lộc ',
-                'Date_of_Birth' => '02/07/1999',
-                'Email'=>'nguyenvanloc@gmail.com',
-                'Phone'=>'1231311313',
-                'Address'=>'Ninh Bình',
+                'fullname' => 'Nguyễn Văn Lộc ',
+                'email'=>'nguyenvanloc@gmail.com',
+                'phone'=>'1231311313',
 
             ],[
-                'Fullname' => 'Trần Bình Minh',
-                'Date_of_Birth' => '03/04/1995',
-                'Email'=>'tranbinhminh@gmail.com',
-                'Phone'=>'0123123123',
-                'Address'=>'Nghệ An',
+                'fullname' => 'Trần Bình Minh',
+                'email'=>'tranbinhminh@gmail.com',
+                'phone'=>'0123123123',
 
             ],[
-                'Fullname' => 'Vũ Trần Hoàng',
-                'Date_of_Birth' => '11/12/1992',
-                'Email'=>'vutranhoang@gmail.com',
-                'Phone'=>'123123132',
-                'Address'=>'Hà Tĩnh',
+                'fullname' => 'Vũ Trần Hoàng',
+                'email'=>'vutranhoang@gmail.com',
+                'phone'=>'123123132',
             ],
         ]);
     }

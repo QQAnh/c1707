@@ -15,11 +15,11 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Username');
-            $table->string('Password');
-            $table->string('Salt');
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->string('salt');
+            $table->integer('status')->default('1');
             $table->timestamps();
-            $table->integer('Status');
         });
     }
 
