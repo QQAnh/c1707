@@ -45,23 +45,7 @@ Route::get('/user/destroy/{id}', function ($id) {
 
 });
 Route::post('/user/hello', function (Request $request) {
-    $entries = [
-        'Fullname' => 'Lê Văn Luyện',
-        'Date_of_Birth' => '11-02-1992',
-        'Email' => 'qưeqew@gmail.com',
-        'Phone' => '132131313',
-        'Address' => 'Hà TĨnh '
-    ];
-    $user = [
-        "Fullname" => $request->input('Fullname'),
-        "Date_of_Birth" =>$request->input('Date_of_Birth'),
-        "Email" =>$request->input('Email'),
-        "Phone" =>$request->input('Phone'),
-        "Address" =>$request->input('Address')
-    ];
-    $entries [] = $user;
-    return response()->json($entries, 200);
-
+   $results = DB::insert('insert into users (Fullname ,Date_of_Birth, Email,Phone,Address ) value (? , ? ,? , ?,? )',['Lê văn luyện','11-12-1990','maasds@gmail.com','0123123121','Hà tĩnh']);
 
 });
 
