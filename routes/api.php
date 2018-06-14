@@ -44,6 +44,15 @@ Route::get('/user/destroy/{id}', function ($id) {
     return "destroy";
 
 });
+Route::get('/product', function (Request $request) {
+
+    $entries = \App\Product::all();
+    return response()->json($entries, 201);
+});
+Route::get('/product/{id}', function (Request $request, $id) {
+    $entries = \App\Product::find($id);
+    return response()->json($entries, 201);
+});
 Route::post('/user/hello', function (Request $request) {
    $results = DB::insert('insert into users (Fullname ,Date_of_Birth, Email,Phone,Address ) value (? , ? ,? , ?,? )',['Lê văn luyện','11-12-1990','maasds@gmail.com','0123123121','Hà tĩnh']);
 
