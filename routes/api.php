@@ -53,7 +53,7 @@ Route::post('/user/hello', function (Request $request) {
         'Address' => 'Hà TĨnh '
     ];
     $user = [
-        "Fullname" => $request->input(''),
+        "Fullname" => $request->input('Fullname'),
         "Date_of_Birth" =>$request->input('Date_of_Birth'),
         "Email" =>$request->input('Email'),
         "Phone" =>$request->input('Phone'),
