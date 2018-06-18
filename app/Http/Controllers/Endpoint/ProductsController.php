@@ -83,7 +83,22 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $productJson = $request->json()->all();
+        $product = new Product();
+        $product = Product::find($id);
+        $product->title = $productJson['title'];
+        $product->category = $productJson['category'];
+        $product->description = $productJson['description'];
+        $product->thumbnail = $productJson['thumbnail'];
+        $product->price = $productJson['price'];
+        $product->created_at = $productJson['created_at'];
+        $product->updated_at = $productJson['updated_at'];
+        $product->save();
+        return response()->json($productJson, 201);
+
+
+
+
     }
 
     /**
@@ -94,6 +109,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        \App\User::destroy($id);
+        return "destroy";
     }
 }
