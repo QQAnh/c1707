@@ -16,8 +16,15 @@
 //});
 Route::resource("account","AccountsController");
 Route::resource("user", "UsersController");
-Route::resource("product","ProductsController");
+//Route::resource("product","ProductsController");
 Route::get('account', function () {
 
     return App\Account::all();
 });
+Route::get('/', 'AdminController@index');
+
+Route::get('/loginAdmin', 'AdminController@loginAdmin');
+
+Route::get('/listUserAdmin', 'AdminController@listUser');
+
+Route::get('/formUserAdmin', 'AdminController@formUser');

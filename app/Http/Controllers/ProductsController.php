@@ -14,8 +14,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return view('product')->with('product' , $product);
+//        $product = Product::all();
+//        return view('product')->with('product' , $product);
+        return "index page";
     }
 
     /**
@@ -26,6 +27,7 @@ class ProductsController extends Controller
     public function create()
     {
         //
+        return "create page";
     }
 
     /**
@@ -48,6 +50,7 @@ class ProductsController extends Controller
     public function show($id)
     {
         //
+        return "show by id";
     }
 
     /**
