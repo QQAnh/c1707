@@ -37,7 +37,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $data = $request->json()->all();
-        return response()->json($data, 201);
+        return response()->json($data["title"], 201);
     }
 
     /**
