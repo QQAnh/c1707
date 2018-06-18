@@ -32,11 +32,23 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:products|max:50',
+            'category' => 'required',
+            'description' => 'required',
+            'thumbnail' => 'required',
+            'price' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return redirect('products/create')
+                ->withErrors($validator->errors())
+                ->withInput();
+        }
         $productJson = $request->json()->all();
 
         $product = new Product();
@@ -54,19 +66,23 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request , $id)
+    public function show(Request $request, $id)
     {
-            $entries = \App\Product::find($id);
-            return response()->json($entries, 201);
+        $entries = \App\Product::find($id);
+        if ($entries === null) {
+            return "404";
+        }
+
+        return response()->json($entries, 201);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -77,8 +93,8 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,14 +112,12 @@ class ProductsController extends Controller
         return response()->json($productJson, 201);
 
 
-
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
