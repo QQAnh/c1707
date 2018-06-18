@@ -101,6 +101,21 @@ class ProductsController extends Controller
     {
         $productJson = $request->json()->all();
         $product = Product::find($id);
+        if ($product === null) {
+            return view("errors.404");
+        }
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:products|max:50',
+            'category' => 'required',
+            'description' => 'required',
+            'thumbnail' => 'required',
+            'price' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return redirect('products/update')
+                ->withErrors($validator->errors())
+                ->withInput();
+        }
         $product->title = $productJson['title'];
         $product->category = $productJson['category'];
         $product->description = $productJson['description'];
