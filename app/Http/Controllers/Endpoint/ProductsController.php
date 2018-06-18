@@ -137,7 +137,11 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        \App\User::destroy($id);
+
+        $entries = \App\User::destroy($id);
+        if ($entries === null) {
+            return view("errors.404");
+        }
         return "Success";
     }
 }
