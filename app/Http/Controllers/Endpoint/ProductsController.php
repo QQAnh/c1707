@@ -73,7 +73,7 @@ class ProductsController extends Controller
     {
         $entries = \App\Product::find($id);
         if ($entries === null) {
-            return "404";
+            return view("errors.404");
         }
 
         return response()->json($entries, 201);
