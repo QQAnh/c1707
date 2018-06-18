@@ -84,7 +84,6 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $productJson = $request->json()->all();
-        $product = new Product();
         $product = Product::find($id);
         $product->title = $productJson['title'];
         $product->category = $productJson['category'];
@@ -110,6 +109,6 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         \App\User::destroy($id);
-        return "destroy";
+        return "Success";
     }
 }
