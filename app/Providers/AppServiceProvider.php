@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(1000);
+        Schema::defaultStringLength(767);
 
     }
 
