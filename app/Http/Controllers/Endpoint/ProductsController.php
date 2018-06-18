@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Endpoint;
 
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,7 @@ class ProductsController extends Controller
     public function index()
     {
         $entries = \App\Product::all();
-        return response()->json($entries, 201);
+        return response()->json($entries, 200);
     }
 
     /**
@@ -36,8 +37,18 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
-        return response()->json($data["title"], 201);
+        $productJson = $request->json()->all();
+
+        $product = new Product();
+        $product->title = $productJson['title'];
+        $product->category = $productJson['category'];
+        $product->description = $productJson['description'];
+        $product->thumbnail = $productJson['thumbnail'];
+        $product->price = $productJson['price'];
+        $product->created_at = $productJson['created_at'];
+        $product->updated_at = $productJson['updated_at'];
+        $product->save();
+        return response()->json($productJson, 201);
     }
 
     /**
