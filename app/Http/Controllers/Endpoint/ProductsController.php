@@ -76,7 +76,7 @@ class ProductsController extends Controller
             return view("errors.404");
         }
 
-        return response()->json($entries, 201);
+        return response()->json($entries, 200);
     }
 
     /**
