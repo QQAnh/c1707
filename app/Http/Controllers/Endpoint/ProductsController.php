@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\Endpoint;
+
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 class ProductsController extends Controller
 {
     /**
@@ -15,6 +18,7 @@ class ProductsController extends Controller
         $entries = \App\Product::all();
         return response()->json($entries, 200);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -24,6 +28,7 @@ class ProductsController extends Controller
     {
         //
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -45,6 +50,7 @@ class ProductsController extends Controller
                 ->withInput();
         }
         $productJson = $request->json()->all();
+
         $product = new Product();
         $product->title = $productJson['title'];
         $product->category = $productJson['category'];
@@ -56,6 +62,7 @@ class ProductsController extends Controller
         $product->save();
         return response()->json($productJson, 201);
     }
+
     /**
      * Display the specified resource.
      *
@@ -68,8 +75,10 @@ class ProductsController extends Controller
         if ($entries === null) {
             return view("errors.404");
         }
+
         return response()->json($entries, 200);
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -80,6 +89,7 @@ class ProductsController extends Controller
     {
         //
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -115,7 +125,10 @@ class ProductsController extends Controller
         $product->updated_at = $productJson['updated_at'];
         $product->save();
         return response()->json($productJson, 201);
+
+
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -124,6 +137,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
+
         $entries = \App\User::destroy($id);
         if ($entries === null) {
             return view("errors.404");
