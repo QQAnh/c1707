@@ -89,6 +89,11 @@ class ProductsController extends Controller
     {
         //
     }
+    public function getByCategory($id){
+        $product = Product::where('category',$id)->get();
+        return response()->json($product, 200);
+
+    }
 
     /**
      * Update the specified resource in storage.
