@@ -29,7 +29,3 @@ Route::get('/listUserAdmin', 'AdminController@listUser');
 
 Route::get('/formUserAdmin', 'AdminController@formUser');
 
-Route::get('/hello', function () {
-    $product = \App\Product::where('category',1)->get();
-    return response()->json($product, 201);
-});
