@@ -64,8 +64,8 @@ Route::resource('products', 'Endpoint\ProductsController');
 Route::resource('category', 'Endpoint\CategoriesController');
 
 Route::get('/product/category', function ( $category) {
-$product = DB::table('products')->where('category',1)->first();
- echo $product->category;
+$product = DB::table('products')->where('category',1)->get();
+ echo $product;
 
 });
 
