@@ -62,12 +62,7 @@ Route::get('/user/destroy/{id}', function ($id) {
 
 Route::resource('products', 'Endpoint\ProductsController');
 Route::resource('category', 'Endpoint\CategoriesController');
-Route::get('/products/hello', function (Request $request, $id) {
-    $categoryId = 10;
-    $category = Mage::getModel('catalog/category')->load($categoryId);
-    return response()->json($category, 201);
 
-});
 
 
 
