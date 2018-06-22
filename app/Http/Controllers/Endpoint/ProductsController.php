@@ -16,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $entries = \App\Product::all();
+        $entries = \App\Product::where('category',1);
         return response()->json($entries, 200);
     }
 

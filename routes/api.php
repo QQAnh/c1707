@@ -62,11 +62,7 @@ Route::get('/user/destroy/{id}', function ($id) {
 
 Route::resource('products', 'Endpoint\ProductsController');
 Route::resource('category', 'Endpoint\CategoriesController');
-Route::get('/products/smartphone', function () {
 
-    $entries = \App\Product::Where('category',1)->first();
-    return response()->json($entries, 201);
-});
 
 
 
