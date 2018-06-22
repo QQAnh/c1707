@@ -131,13 +131,13 @@ class ProductsController extends Controller
 
     }
 
-    public function getByCategory($categoryId){
-        $product = Product::where('category', $categoryId)->get();
-
-        return response()->json($product, 200);
-
-
-    }
+//    public function getByCategory($categoryId){
+//        $product = Product::where('category', $categoryId)->get();
+//
+//        return response()->json($product, 200);
+//
+//
+//    }
 
     /**
      * Remove the specified resource from storage.
