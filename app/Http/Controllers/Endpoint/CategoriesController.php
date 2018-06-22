@@ -57,7 +57,7 @@ class CategoriesController extends Controller
      */
     public function show(Request $request , $id)
     {
-        $entries = Category::find($id);
+        $entries = Category::all($id);
         if ($entries === null) {
             return view("errors.404");
         }

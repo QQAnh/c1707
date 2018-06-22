@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Endpoint;
 
+use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -38,7 +39,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:products|max:50',
+            'title' => 'required|unique:products|max:255',
             'category' => 'required',
             'description' => 'required',
             'thumbnail' => 'required',
@@ -105,7 +106,7 @@ class ProductsController extends Controller
             return view("errors.404");
         }
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:products|max:50',
+            'title' => 'required|unique:products|max:255',
             'category' => 'required',
             'description' => 'required',
             'thumbnail' => 'required',
@@ -126,6 +127,9 @@ class ProductsController extends Controller
         $product->save();
         return response()->json($productJson, 201);
 
+
+    }
+    public function getByCategory(){
 
     }
 
