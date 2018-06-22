@@ -90,6 +90,10 @@ class ProductsController extends Controller
     {
         //
     }
+    public function findSmartPhone(){
+        $product = \App\Product::where('category',1)->get();
+        return response()->json($product, 201);
+    }
 
     /**
      * Update the specified resource in storage.
