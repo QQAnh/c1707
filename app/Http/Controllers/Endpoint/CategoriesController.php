@@ -71,9 +71,11 @@ class CategoriesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function product($id)
     {
-        //
+        $category   = Category::where('id', $id)->first();
+        return response()->json($category, 201);
+
     }
 
     /**
