@@ -55,16 +55,14 @@ class CategoriesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id = null)
+    public function show(Request $request , $id)
     {
-        if (empty($id)) {
-            $products = Category::find($id)->products;
-
+        $entries = Category::find($id);
+        if ($entries === null) {
+            return view("errors.404");
         }
-        $categories=Category::all();
 
-
-        return response()->json($categories,201);
+        return response()->json($entries, 201);
     }
 
     /**
@@ -75,14 +73,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-
-    }
-
-    public function product($id)
-    {
-        $category = Category::where('id', $id)->first();
-        return response()->json($category, 201);
-
+        //
     }
 
     /**
