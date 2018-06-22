@@ -70,9 +70,9 @@ class ProductsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $category)
+    public function show(Request $request, $id)
     {
-        $entries = \App\Product::find($category);
+        $entries = \App\Product::find($id);
         if ($entries === null) {
             return view("errors.404");
         }
