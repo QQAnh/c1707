@@ -130,8 +130,9 @@ class ProductsController extends Controller
 
 
     }
-    public function getByCategory($category){
-        $product = Product::where('category', $category);
+
+    public function getByCategory($categoryId){
+        $product = Product::where('category', $categoryId);
 
         return response()->json($product, 200);
 
