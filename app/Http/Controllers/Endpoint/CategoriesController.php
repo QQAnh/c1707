@@ -55,14 +55,16 @@ class CategoriesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request , $id)
+    public function show($id = null)
     {
-        $entries = Category::find($id);
-        if ($entries === null) {
-            return view("errors.404");
-        }
+        if (empty($id)) {
+            $products = Category::find($id)->products;
 
-        return response()->json($entries, 201);
+        }
+        $categories=Category::all();
+
+
+        return response()->json($categories,201);
     }
 
     /**
@@ -75,8 +77,10 @@ class CategoriesController extends Controller
     {
 
     }
-    public function product($id){
-        $category   = Category::where('id', $id)->first();
+
+    public function product($id)
+    {
+        $category = Category::where('id', $id)->first();
         return response()->json($category, 201);
 
     }
