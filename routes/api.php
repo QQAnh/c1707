@@ -67,5 +67,3 @@ Route::resource('category', 'Endpoint\CategoriesController');
 
 
 
-
-
