@@ -62,6 +62,9 @@ Route::get('/user/destroy/{id}', function ($id) {
 
 Route::resource('products', 'Endpoint\ProductsController');
 Route::resource('category', 'Endpoint\CategoriesController');
+Route::get('/hello',function (){
+   return 'hello';
+});
 
 
 
