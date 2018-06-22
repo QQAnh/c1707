@@ -16,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $entries = \App\Product::where('category',1);
+        $entries = \App\Product::all();
         return response()->json($entries, 200);
     }
 
@@ -70,9 +70,9 @@ class ProductsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $category)
     {
-        $entries = \App\Product::find($id);
+        $entries = \App\Product::find($category);
         if ($entries === null) {
             return view("errors.404");
         }
