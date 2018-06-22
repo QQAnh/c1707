@@ -63,19 +63,7 @@ Route::get('/user/destroy/{id}', function ($id) {
 Route::resource('products', 'Endpoint\ProductsController');
 Route::resource('category', 'Endpoint\CategoriesController');
 
-//Route::get('category/{categoryId}', 'Endpoint\ProductsController@getByCategory');
-//Route::get('smartphone', function () {
-//    $product = \App\Product::where('category',1)->get();
-//    return response()->json($product, 201);
-//});
-//Route::get('laptop', function () {
-//    $product = \App\Product::where('category',2)->get();
-//    return response()->json($product, 201);
-//});
-//Route::get('pc', function () {
-//    $product = \App\Product::where('category',3)->get();
-//    return response()->json($product, 201);
-//});
+
 
 
 
