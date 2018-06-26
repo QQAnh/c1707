@@ -15,7 +15,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-       $order  = Order::all();
+       $order  =  \App\Order::all();
        return response()->json($order, 200);
 
     }
