@@ -20,6 +20,7 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('unitPrice');
             $table->integer('discount');
         });
+
     }
 
     /**

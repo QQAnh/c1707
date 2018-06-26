@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('createdAt');
             $table->integer('totalPrice');
             $table->string('shipAddress');
-            $table->string('userId');
+            $table->integer('userId');
             $table->integer('status');
         });
     }
