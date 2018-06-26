@@ -41,9 +41,9 @@ class CategoriesController extends Controller
 
         $categoryJson = $request->json()->all();
         $category = new Category();
-        $category->title = $categoryJson['id'];
+        $category->id = $categoryJson['id'];
         $category->title = $categoryJson['title'];
-        $category->title = $categoryJson['image_url'];
+        $category->image_url = $categoryJson['image_url'];
         $category->save();
         return response()->json($categoryJson, 201);
 

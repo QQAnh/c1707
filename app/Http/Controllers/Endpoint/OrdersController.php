@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Endpoint;
 
-use App\Account;
+use App\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AccountsController extends Controller
+class OrdersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        $account = Account::all();
-        return view('account')->with('account' , $account);
+        $entries = Order::all();
+        return response()->json($entries, 200);
     }
 
     /**
@@ -36,7 +37,16 @@ class AccountsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $orderJson = $request->json()->all();
+        $order = new Order();
+        $order->createdAt = $order['createdAt'];
+        $order->totalPrice = $order['totalPrice'];
+        $order->shipAddress = $order['shipAddress'];
+        $order->userId = $order['userId'];
+        $order->status = $order['status'];
+        $order->save();
+        return response()->json($orderJson, 201);
+
     }
 
     /**
@@ -47,7 +57,13 @@ class AccountsController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $entries = Order::find($id);
+        if ($entries === null) {
+            return view("errors.404");
+        }
+
+        return response()->json($entries, 201);
     }
 
     /**
@@ -83,4 +99,5 @@ class AccountsController extends Controller
     {
         //
     }
+
 }

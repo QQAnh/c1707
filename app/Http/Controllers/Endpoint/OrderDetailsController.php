@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Endpoint;
 
-use App\User;
+use App\OrderDetail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class UsersController extends Controller
+class OrderDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return view('user')->with('user' , $user);
+        $entries = OrderDetail::all();
+        return response()->json($entries, 200);
     }
 
     /**
@@ -36,7 +37,17 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $orderdetailJson = $request->json()->all();
+        $orderdetail = new OrderDetail();
+        $orderdetail->orderId = $orderdetail['orderId'];
+        $orderdetail->productId = $orderdetail['productId'];
+        $orderdetail->quantity = $orderdetail['quantity'];
+        $orderdetail->unitPrice = $orderdetail['unitPrice'];
+        $orderdetail->unitPrice = $orderdetail['discount'];
+
+
+        $orderdetail->save();
+        return response()->json($orderdetailJson, 201);
     }
 
     /**
@@ -47,7 +58,12 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $entries = OrderDetail::find($id);
+        if ($entries === null) {
+            return view("errors.404");
+        }
+
+        return response()->json($entries, 201);
     }
 
     /**
