@@ -18,6 +18,10 @@ class ProductsController extends Controller
         $entries = \App\Product::all();
         return response()->json($entries, 200);
     }
+    public function helo(){
+        $product = Product::paginate(6);
+        return view('demo')->with("list_product",$product);
+    }
 
     /**
      * Show the form for creating a new resource.
