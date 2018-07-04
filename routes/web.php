@@ -28,4 +28,3 @@ Route::get('/loginAdmin', 'AdminController@loginAdmin');
 Route::get('/listUserAdmin', 'AdminController@listUser');
 
 Route::get('/formUserAdmin', 'AdminController@formUser');
-Route::get('/hello','ProductsController@helo');
