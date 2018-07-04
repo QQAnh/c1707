@@ -5,6 +5,8 @@ $(document).ready(function () {
 })
 function getApi() {
     $.ajax({
+        type: "GET",
+        dataType: 'jsonp',
         url: API
     }).done(function (data) {
         var output = '';
