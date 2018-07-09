@@ -88,7 +88,7 @@ class UserMembersController extends Controller
 
         return response()->json($entries, 200);
     }
-    }
+
 
     /**
      * Show the form for editing the specified resource.
