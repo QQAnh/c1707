@@ -81,11 +81,13 @@ class UserMembersController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $user = UserMember::find($id);
-        if ($user === null) {
-        return view('errors.404');
+        $entries = \App\UserMember::find($id);
+        if ($entries === null) {
+            return;
+        }
+
+        return response()->json($entries, 200);
     }
-        return response()->json($user, 201);
     }
 
     /**
