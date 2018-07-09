@@ -34,7 +34,6 @@ class ProductsController extends Controller
     {
         $title = $request->input('title');
         $data = DB::table('products')
-            ->join('cats', 'cats.id', 'products.cats_id')
             ->where('products.titles', 'like', '%' . $title . '%')
             ->get();
         return response()->json($data, 200);

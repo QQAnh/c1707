@@ -1,4 +1,4 @@
-var API = "https://quiet-cliffs-41062.herokuapp.com/api/user";
+var API = "http://quiet-cliffs-41062.herokuapp.com/api/user";
 
 $(document).ready(function () {
     getApi();

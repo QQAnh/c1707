@@ -36,7 +36,6 @@
                                 </tr>
                             </thead>
                             <tbody id="demo-get">
-
                             </tbody>
                         </table>
                     </div>
