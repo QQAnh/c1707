@@ -39,14 +39,17 @@ class CategoriesController extends Controller
     {
 
 
-        $categoryJson = $request->json()->all();
-        $category = new Category();
-        $category->id = $categoryJson['id'];
-        $category->title = $categoryJson['title'];
-        $category->image_url = $categoryJson['image_url'];
-        $category->save();
-        return response()->json($categoryJson, 201);
-
+        try {
+            $categoryJson = $request->json()->all();
+            $category = new Category();
+            $category->id = $categoryJson['id'];
+            $category->title = $categoryJson['title'];
+            $category->image_url = $categoryJson['image_url'];
+            $category->save();
+            return response()->json($categoryJson, 201);
+        } catch (EXCEPTION $exception) {
+            return response()->json($exception->errors(), 400);
+        }
     }
 
     /**
@@ -55,7 +58,7 @@ class CategoriesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request , $id)
+    public function show(Request $request, $id)
     {
         $entries = Category::find($id);
         if ($entries === null) {
@@ -85,17 +88,20 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $categoryJson = $request->json()->all();
-        $category = Category::find($id);
-        if ($category === null) {
-            return view("errors.404");
+        try {
+            $categoryJson = $request->json()->all();
+            $category = Category::find($id);
+            if ($category === null) {
+                return;
+            }
+            $category->title = $categoryJson['id'];
+            $category->title = $categoryJson['title'];
+            $category->title = $categoryJson['image_url'];
+            $category->save();
+            return response()->json($categoryJson, 201);
+        } catch (EXCEPTION $exception) {
+            return response()->json($exception->errors(), 400);
         }
-        $category->title = $categoryJson['id'];
-        $category->title = $categoryJson['title'];
-        $category->title = $categoryJson['image_url'];
-        $category->save();
-        return response()->json($categoryJson, 201);
-
     }
 
     /**

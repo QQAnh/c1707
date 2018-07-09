@@ -39,34 +39,39 @@ class UserMembersController extends Controller
      */
     public function store(Request $request)
     {
-        $userJson = $request->json()->all();
+        try{
+            $userJson = $request->json()->all();
 
-        $validator = Validator::make($userJson, [
-            'fullname' => 'required|unique:user_members|max:50',
-            'phone' => 'required',
-            'password' => 'required',
-            'gender' => 'required',
-            'email' => 'required|email',
-            'salt' => 'required',
-            'role' => 'required',
-            'status' => 'required',
-            'avatar' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors(),404);
+            $validator = Validator::make($userJson, [
+                'fullname' => 'required|unique:user_members|max:50',
+                'phone' => 'required',
+                'password' => 'required',
+                'gender' => 'required',
+                'email' => 'required|email',
+                'salt' => 'required',
+                'role' => 'required',
+                'status' => 'required',
+                'avatar' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json($validator->errors(),404);
+            }
+            $user = new UserMember();
+            $user->fullname = $userJson['fullname'];
+            $user->phone = $userJson['phone'];
+            $user->password = $userJson['password'];
+            $user->email = $userJson['email'];
+            $user->gender = $userJson['gender'];
+            $user->salt = $userJson['salt'];
+            $user->role = $userJson['role'];
+            $user->status = $userJson['status'];
+            $user->avatar = $userJson['avatar'];
+            $user->save();
+            return response()->json($user,201);
+        }catch (EXCEPTION $exception) {
+            return response()->json($exception->errors(), 500);
         }
-        $user = new UserMember();
-        $user->fullname = $userJson['fullname'];
-        $user->phone = $userJson['phone'];
-        $user->password = $userJson['password'];
-        $user->email = $userJson['email'];
-        $user->gender = $userJson['gender'];
-        $user->salt = $userJson['salt'];
-        $user->role = $userJson['role'];
-        $user->status = $userJson['status'];
-        $user->avatar = $userJson['avatar'];
-        $user->save();
-        return response()->json($user,201);
+
     }
 
     /**
@@ -103,35 +108,41 @@ class UserMembersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   $userJson = $request->json()->all();
+    {
+        try{
+            $userJson = $request->json()->all();
 
-        $validator = Validator::make($userJson, [
-            'fullname' => 'required|unique:user_members|max:50',
-            'phone' => 'required',
-            'password' => 'required',
-            'gender' => 'required',
-            'email' => 'required',
-            'salt' => 'required',
-            'role' => 'required',
-            'status' => 'required',
-            'avatar' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors(),404);
+            $validator = Validator::make($userJson, [
+                'fullname' => 'required|unique:user_members|max:50',
+                'phone' => 'required',
+                'password' => 'required',
+                'gender' => 'required',
+                'email' => 'required',
+                'salt' => 'required',
+                'role' => 'required',
+                'status' => 'required',
+                'avatar' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json($validator->errors(),404);
+            }
+
+            $user = UserMember::find($id);
+            $user->fullname = $userJson['fullname'];
+            $user->phone = $userJson['phone'];
+            $user->password = $userJson['password'];
+            $user->email = $userJson['email'];
+            $user->gender = $userJson['gender'];
+            $user->salt = $userJson['salt'];
+            $user->role = $userJson['role'];
+            $user->status = $userJson['status'];
+            $user->avatar = $userJson['avatar'];
+            $user->save();
+            return response()->json($user,201);
+        } catch (EXCEPTION $exception) {
+            return response()->json($exception->errors(), 500);
         }
 
-        $user = UserMember::find($id);
-        $user->fullname = $userJson['fullname'];
-        $user->phone = $userJson['phone'];
-        $user->password = $userJson['password'];
-        $user->email = $userJson['email'];
-        $user->gender = $userJson['gender'];
-        $user->salt = $userJson['salt'];
-        $user->role = $userJson['role'];
-        $user->status = $userJson['status'];
-        $user->avatar = $userJson['avatar'];
-        $user->save();
-        return response()->json($user,201);
     }
 
     /**

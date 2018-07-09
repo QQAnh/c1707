@@ -66,6 +66,9 @@ Route::resource('user','UserMembersController');
 Route::resource('orders', 'Endpoint\OrdersController');
 Route::resource('orderdetail', 'Endpoint\OrderDetailsController');
 Route::get('/products/category/{id}','Endpoint\ProductsController@getByCategory');
+Route::get('/products/{title}','Endpoint\ProductsController@search');
+
+
 
 
 

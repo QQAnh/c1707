@@ -30,6 +30,18 @@ class ProductsController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $title = $request->input('title');
+        $data = DB::table('products')
+            ->join('cats', 'cats.id', 'products.cats_id')
+            ->where('products.titles', 'like', '%' . $title . '%')
+            ->get();
+        return response()->json($data, 200);
+
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,30 +50,32 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:products|max:50',
-            'category' => 'required',
-            'description' => 'required',
-            'thumbnail' => 'required',
-            'price' => 'required'
-        ]);
-        if ($validator->fails()) {
-            return redirect('products/create')
-                ->withErrors($validator->errors())
-                ->withInput();
-        }
-        $productJson = $request->json()->all();
+        try {
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|unique:products|max:50',
+                'category' => 'required',
+                'description' => 'required',
+                'thumbnail' => 'required',
+                'price' => 'required'
+            ]);
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 400);
 
-        $product = new Product();
-        $product->title = $productJson['title'];
-        $product->category = $productJson['category'];
-        $product->description = $productJson['description'];
-        $product->thumbnail = $productJson['thumbnail'];
-        $product->price = $productJson['price'];
-        $product->created_at = $productJson['created_at'];
-        $product->updated_at = $productJson['updated_at'];
-        $product->save();
-        return response()->json($productJson, 201);
+            }
+            $productJson = $request->json()->all();
+            $product = new Product();
+            $product->title = $productJson['title'];
+            $product->category = $productJson['category'];
+            $product->description = $productJson['description'];
+            $product->thumbnail = $productJson['thumbnail'];
+            $product->price = $productJson['price'];
+            $product->created_at = $productJson['created_at'];
+            $product->updated_at = $productJson['updated_at'];
+            $product->save();
+            return response()->json($productJson, 201);
+        } catch (EXCEPTION $exception) {
+            return response()->json($exception->errors(), 500);
+        }
     }
 
     /**
@@ -74,7 +88,7 @@ class ProductsController extends Controller
     {
         $entries = \App\Product::find($id);
         if ($entries === null) {
-            return view("errors.404");
+            return;
         }
 
         return response()->json($entries, 200);
@@ -90,8 +104,10 @@ class ProductsController extends Controller
     {
         //
     }
-    public function getByCategory($id){
-        $product = Product::where('category',$id)->get();
+
+    public function getByCategory($id)
+    {
+        $product = Product::where('category', $id)->get();
         return response()->json($product, 200);
 
     }
@@ -106,10 +122,7 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $productJson = $request->json()->all();
-        $product = Product::find($id);
-        if ($product === null) {
-            return view("errors.404");
-        }
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|unique:products|max:50',
             'category' => 'required',
@@ -118,21 +131,27 @@ class ProductsController extends Controller
             'price' => 'required'
         ]);
         if ($validator->fails()) {
-            return redirect('products/update')
-                ->withErrors($validator->errors())
-                ->withInput();
+            return response()->json($validator->errors(), 400);
+
         }
-        $product->title = $productJson['title'];
-        $product->category = $productJson['category'];
-        $product->description = $productJson['description'];
-        $product->thumbnail = $productJson['thumbnail'];
-        $product->price = $productJson['price'];
-        $product->created_at = $productJson['created_at'];
-        $product->updated_at = $productJson['updated_at'];
-        $product->save();
-        return response()->json($productJson, 201);
+        try {
+            $product = Product::find($id);
+            if ($product === null) {
+                return response()->json($validator->errors(), 400);
 
-
+            }
+            $product->title = $productJson['title'];
+            $product->category = $productJson['category'];
+            $product->description = $productJson['description'];
+            $product->thumbnail = $productJson['thumbnail'];
+            $product->price = $productJson['price'];
+            $product->created_at = $productJson['created_at'];
+            $product->updated_at = $productJson['updated_at'];
+            $product->save();
+            return response()->json($productJson, 201);
+        } catch (EXCEPTION $exception) {
+            return response()->json($exception->errors(), 400);
+        }
     }
 
     /**
@@ -144,10 +163,11 @@ class ProductsController extends Controller
     public function destroy($id)
     {
 
-        $entries = \App\User::destroy($id);
-        if ($entries === null) {
-            return view("errors.404");
-        }
-        return "Success";
+//        $entries = \App\User::destroy($id);
+//        if ($entries === null) {
+//            return view("errors.404");
+//        }
+//        return "Success";
+
     }
 }

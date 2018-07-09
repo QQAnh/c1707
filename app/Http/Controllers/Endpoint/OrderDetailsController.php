@@ -38,15 +38,20 @@ class OrderDetailsController extends Controller
     public function store(Request $request)
     {
         $orderdetailJson = $request->json()->all();
-        $orderdetail = new OrderDetail();
-        $orderdetail->orderId = $orderdetail['orderId'];
-        $orderdetail->productId = $orderdetail['productId'];
-        $orderdetail->quantity = $orderdetail['quantity'];
-        $orderdetail->unitPrice = $orderdetail['unitPrice'];
-        $orderdetail->unitPrice = $orderdetail['discount'];
+        try{
+            $orderdetail = new OrderDetail();
+            $orderdetail->orderId = $orderdetail['orderId'];
+            $orderdetail->productId = $orderdetail['productId'];
+            $orderdetail->quantity = $orderdetail['quantity'];
+            $orderdetail->unitPrice = $orderdetail['unitPrice'];
+            $orderdetail->unitPrice = $orderdetail['discount'];
 
 
-        $orderdetail->save();
+            $orderdetail->save();
+        }catch (EXCEPTION $exception){
+            return response()->json($exception->errors(),400);
+        }
+
         return response()->json($orderdetailJson, 201);
     }
 
