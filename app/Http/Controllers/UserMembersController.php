@@ -79,9 +79,9 @@ class UserMembersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $phone)
+    public function show(Request $request, $id)
     {
-        $user = UserMember::find($phone);
+        $user = UserMember::find($id);
         if ($user === null) {
         return view('errors.404');
     }
