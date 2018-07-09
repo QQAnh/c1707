@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-
 class UserMembersController extends Controller
 {
     /**
@@ -34,12 +33,12 @@ class UserMembersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        try{
+        try {
             $userJson = $request->json()->all();
 
             $validator = Validator::make($userJson, [
@@ -54,7 +53,7 @@ class UserMembersController extends Controller
                 'avatar' => 'required',
             ]);
             if ($validator->fails()) {
-                return response()->json($validator->errors(),404);
+                return response()->json($validator->errors(), 404);
             }
             $user = new UserMember();
             $user->fullname = $userJson['fullname'];
@@ -67,8 +66,8 @@ class UserMembersController extends Controller
             $user->status = $userJson['status'];
             $user->avatar = $userJson['avatar'];
             $user->save();
-            return response()->json($user,201);
-        }catch (EXCEPTION $exception) {
+            return response()->json($user, 201);
+        } catch (EXCEPTION $exception) {
             return response()->json($exception->errors(), 500);
         }
 
@@ -77,22 +76,22 @@ class UserMembersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request ,$phone)
+    public function show(Request $request, $phone)
     {
         $user = UserMember::find($phone);
         if ($user === null) {
-            return view('errors.404');
-        }
-        return response()->json($user,201);
+        return view('errors.404');
+    }
+        return response()->json($user, 201);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -103,13 +102,13 @@ class UserMembersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        try{
+        try {
             $userJson = $request->json()->all();
 
             $validator = Validator::make($userJson, [
@@ -124,7 +123,7 @@ class UserMembersController extends Controller
                 'avatar' => 'required',
             ]);
             if ($validator->fails()) {
-                return response()->json($validator->errors(),404);
+                return response()->json($validator->errors(), 404);
             }
 
             $user = UserMember::find($id);
@@ -138,7 +137,7 @@ class UserMembersController extends Controller
             $user->status = $userJson['status'];
             $user->avatar = $userJson['avatar'];
             $user->save();
-            return response()->json($user,201);
+            return response()->json($user, 201);
         } catch (EXCEPTION $exception) {
             return response()->json($exception->errors(), 500);
         }
@@ -148,17 +147,17 @@ class UserMembersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $user = UserMember::destroy($id);
 
-        if(!$user){
+        if (!$user) {
             return response()->json(['error' => 'Error : User not found']);
         }
-        $user -> delete();
+        $user->delete();
         return response()->json(['success']);
     }
 }
