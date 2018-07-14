@@ -67,7 +67,7 @@ Route::resource('orders', 'Endpoint\OrdersController');
 Route::resource('orderdetail', 'Endpoint\OrderDetailsController');
 Route::get('/products/category/{id}','Endpoint\ProductsController@getByCategory');
 Route::get('/products/{title}','Endpoint\ProductsController@search');
-Route::get('/users/{phone}','Endpoint\UsersController@getByPhone');
+Route::get('/user/{phone}','Endpoint\UsersController@getByPhone');
 
 
 
