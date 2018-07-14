@@ -55,7 +55,7 @@ class UsersController extends Controller
 
     }
     public function getByPhone($phone){
-        $user = User::find($phone);
+        $user = User::where('phone',$phone)->get();
         return response()->json($user, 200);
 
     }
