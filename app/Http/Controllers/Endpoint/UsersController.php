@@ -66,7 +66,7 @@ class UsersController extends Controller
             return response([
                 'status' => Response::HTTP_OK,
                 'response_time' => microtime(true) - LARAVEL_START,
-                'student' => $user
+                'user' => $user
             ],Response::HTTP_OK);
         }
         return response([

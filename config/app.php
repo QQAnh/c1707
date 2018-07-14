@@ -1,3 +1,4 @@
+composer require laravel/passport
 <?php
 
 return [
