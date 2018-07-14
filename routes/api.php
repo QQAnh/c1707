@@ -67,7 +67,19 @@ Route::resource('orders', 'Endpoint\OrdersController');
 Route::resource('orderdetail', 'Endpoint\OrderDetailsController');
 Route::get('/products/category/{id}','Endpoint\ProductsController@getByCategory');
 Route::get('/products/{title}','Endpoint\ProductsController@search');
-Route::get('/user/phone/{phone}','Endpoint\UsersController@getByPhone');
+Route::get('/userphone/{phone}','Endpoint\UsersController@getByPhone');
+Route::post('login',function (Request $request){
+    if (auth()->attempt(['phone'=> $request->input('email'),'password'=>$request->input('password')])){
+        $user = auth()->user();
+        $user->save();
+        return $user;
+
+    }
+    return response()->json([
+        'error' => 'Unauthenticated user',
+        'code' => 401,
+    ], 401);
+});
 
 
 
