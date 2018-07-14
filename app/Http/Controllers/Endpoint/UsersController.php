@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Endpoint;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
@@ -15,7 +16,8 @@ class UsersController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('user')->with('user' , $user);
+        return response()->json($user, 200);
+
     }
 
     /**
@@ -47,7 +49,10 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return response()->json($user, 200);
+
+
     }
 
     /**
