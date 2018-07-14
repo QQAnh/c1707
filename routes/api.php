@@ -68,7 +68,7 @@ Route::resource('orderdetail', 'Endpoint\OrderDetailsController');
 Route::get('/products/category/{id}','Endpoint\ProductsController@getByCategory');
 Route::get('/products/{title}','Endpoint\ProductsController@search');
 Route::get('/userphone/{phone}','Endpoint\UsersController@getByPhone');
-Route::post('/login','Endpoint\UsersController@login');
+Route::post('/login','Endpoint\UsersController@checkLogin');
 
 
 
