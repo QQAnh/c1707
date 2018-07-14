@@ -59,6 +59,24 @@ class UsersController extends Controller
         return response()->json($user, 200);
 
     }
+    public function checkLogin(Request $request){
+        if (Auth::check(['phone' => $request->phone, 'password' => $request->password])){
+            $user = Auth::user();
+            $user->save();
+            return response([
+                'status' => Response::HTTP_OK,
+                'response_time' => microtime(true) - LARAVEL_START,
+                'student' => $user
+            ],Response::HTTP_OK);
+        }
+        return response([
+            'status' => Response::HTTP_BAD_REQUEST,
+            'response_time' => microtime(true) - LARAVEL_START,
+            'error' => 'Wrong phone or password',
+            'request' => $request->all()
+        ],Response::HTTP_BAD_REQUEST);
+
+    }
 
     /**
      * Show the form for editing the specified resource.
