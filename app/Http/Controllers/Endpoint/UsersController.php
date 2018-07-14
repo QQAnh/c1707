@@ -47,11 +47,16 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($phone)
+    public function show($id)
     {
-        $user = User::find($phone);
+        $user = User::find($id);
         return response()->json($user, 200);
 
+
+    }
+    public function getByPhone($phone){
+        $user = User::find($phone);
+        return response()->json($user, 200);
 
     }
 
