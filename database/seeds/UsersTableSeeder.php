@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user')->insert([
+        DB::table('users')->insert([
             ['fullname'=>'Phan Hải','phone'=>'0123456789','gender'=>'orther','email'=>'hung@gmail.com','password'=>'123456','salt'=>'778877', 'role'=>'1', 'status'=>1, 'avatar'=>'https://i.ytimg.com/vi/OsFjcXkc2_E/maxresdefault.jpg'],
             ['fullname'=>'Angela Phương Trinh','phone'=>'0123456789','gender'=>'orther','email'=>'trinh@gmail.com','password'=>'123456','salt'=>'874523', 'role'=>'1', 'status'=>1, 'avatar'=>'http://static2.yan.vn/YanNews/2167221/201707/20170711-051652-angela-phuong-trinh-ivy-moda-4-6907-1491671388_550x744.jpg'],
             ['fullname'=>'Ngọc Trinh','phone'=>'0123456789','gender'=>'orther','email'=>'trinh@gmail.com','password'=>'123456','salt'=>'124532', 'role'=>'1', 'status'=>1, 'avatar'=>'http://static.bongdacuocsong.net/uploaded/lypham/2016_08_25/137759368444662823508541796408154462878282n_dzpp.jpg'],
