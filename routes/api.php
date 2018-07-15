@@ -78,7 +78,7 @@ Route::post('login', function (Request $request) {
         echo 'success';
     }
     else{
-        echo "erross
+        echo "erross";
     }
 });
 
