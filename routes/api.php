@@ -71,7 +71,7 @@ Route::get('/userphone/{phone}','Endpoint\UsersController@getByPhone');
 //Route::post('/login','Endpoint\UsersController@checkLogin');
 Route::post('login', function (Request $request) {
 
-    if (auth()->attempt(['phone' => $request->input('phone'), 'password' => $request->input('password')])) {
+    if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
         // Authentication passed...
         $user = auth()->user();
         $user->save();
