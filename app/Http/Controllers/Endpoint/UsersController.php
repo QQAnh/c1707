@@ -33,7 +33,7 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,7 +44,7 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -54,34 +54,38 @@ class UsersController extends Controller
 
 
     }
-    public function getByPhone($phone){
-        $user = User::where('phone',$phone)->get();
+
+    public function getByPhone($phone)
+    {
+        $user = User::where('phone', $phone)->get();
         return response()->json($user, 200);
 
     }
-    public function checkLogin(Request $request){
-        if (Auth::attempt(['phone' => $request->phone, 'password' => $request->password])){
+
+    public function checkLogin()
+    {
+        if (Auth::attempt(['phone' => request('phone'), 'password' => request('password')])) {
             $user = Auth::user();
             $user->save();
             return response([
                 'status' => Response::HTTP_OK,
                 'response_time' => microtime(true) - LARAVEL_START,
                 'user' => $user
-            ],Response::HTTP_OK);
-        }
-        return response([
-            'status' => Response::HTTP_BAD_REQUEST,
-            'response_time' => microtime(true) - LARAVEL_START,
-            'error' => 'Wrong phone or password',
-            'request' => $request->all()
-        ],Response::HTTP_BAD_REQUEST);
+            ], Response::HTTP_OK);
+        } else {
+            return response([
+                'status' => Response::HTTP_BAD_REQUEST,
+                'response_time' => microtime(true) - LARAVEL_START,
+                'error' => 'Wrong phone or password',
+            ], Response::HTTP_BAD_REQUEST);
 
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -92,8 +96,8 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -104,7 +108,7 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
