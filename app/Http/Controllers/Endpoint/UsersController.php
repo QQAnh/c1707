@@ -60,7 +60,7 @@ class UsersController extends Controller
 
     }
     public function checkLogin(Request $request){
-        if (Auth::check(['phone' => $request->phone, 'password' => $request->password])){
+        if (Auth::attempt(['phone' => $request->phone, 'password' => $request->password])){
             $user = Auth::user();
             $user->save();
             return response([

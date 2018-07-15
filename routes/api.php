@@ -69,17 +69,7 @@ Route::get('/products/category/{id}','Endpoint\ProductsController@getByCategory'
 Route::get('/products/{title}','Endpoint\ProductsController@search');
 Route::get('/userphone/{phone}','Endpoint\UsersController@getByPhone');
 //Route::post('/login','Endpoint\UsersController@checkLogin');
-Route::post('login', function (Request $request) {
-
-    if(Auth::attempt(['phone' => request('phone'), 'password' => request('password')])){
-        $user = Auth::user();
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
-        return response()->json(['success' => $success], $this->successStatus);
-    }
-    else{
-        return response()->json(['error'=>'Unauthorised'], 401);
-    }
-});
+Route::post('login');
 
 
 
