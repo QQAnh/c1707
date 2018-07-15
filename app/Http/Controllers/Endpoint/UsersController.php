@@ -67,18 +67,9 @@ class UsersController extends Controller
         if (Auth::attempt(['phone' => request('phone'), 'password' => request('password')])) {
             $user = Auth::user();
             $user->save();
-            return response([
-                'status' => Response::HTTP_OK,
-                'response_time' => microtime(true) - LARAVEL_START,
-                'user' => $user
-            ], Response::HTTP_OK);
+            echo 'succsess';
         } else {
-            return response([
-                'status' => Response::HTTP_BAD_REQUEST,
-                'response_time' => microtime(true) - LARAVEL_START,
-                'error' => 'Wrong phone or password',
-            ], Response::HTTP_BAD_REQUEST);
-
+echo 'fales';
         }
     }
 
