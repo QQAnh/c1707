@@ -71,20 +71,15 @@ Route::get('/userphone/{phone}','Endpoint\UsersController@getByPhone');
 //Route::post('/login','Endpoint\UsersController@checkLogin');
 Route::post('login', function (Request $request) {
 
-    if (auth()->check(['phone' => $request->phone, 'password' => $request->password])) {
-        // Authentication passed...
-        $user = auth()->user();
-        $user->save();
-        return response([
-            'status' => Response::HTTP_OK,
-            'response_time' => microtime(true) - LARAVEL_START,
-            'user' => $user
-        ],Response::HTTP_OK);    }
-
-    return response()->json([
-        'error' => 'Unauthenticated user',
-        'code' => 401,
-    ], 401);
+    $phone = $request->input('phone');
+    $password= $request->input('$password');
+    $data = DB::select('select id from users where phone =? and password=?',[$phone,$password]);
+    if (count($data)){
+        echo 'success';
+    }
+    else{
+        echo "error";
+    }
 });
 
 
