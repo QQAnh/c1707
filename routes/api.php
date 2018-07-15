@@ -68,8 +68,19 @@ Route::resource('orderdetail', 'Endpoint\OrderDetailsController');
 Route::get('/products/category/{id}','Endpoint\ProductsController@getByCategory');
 Route::get('/products/{title}','Endpoint\ProductsController@search');
 Route::get('/userphone/{phone}','Endpoint\UsersController@getByPhone');
-Route::post('login','Endpoint\UsersController@checkLogin');
-//Route::post('login',);
+//Route::post('/login','Endpoint\UsersController@checkLogin');
+Route::post('login', function (Request $request) {
+
+    $phone = $request->input('phone');
+    $password= $request->input('$password');
+    $data = DB::select('select id from users where phone =? and password=?',[$phone,$password]);
+    if (count($data)){
+        echo 'success';
+    }
+    else{
+        echo "erross
+    }
+});
 
 
 
