@@ -71,14 +71,13 @@ Route::get('/userphone/{phone}','Endpoint\UsersController@getByPhone');
 //Route::post('/login','Endpoint\UsersController@checkLogin');
 Route::post('login', function (Request $request) {
 
-    $phone = $request->input('phone');
-    $password= $request->input('password');
-    $data = DB::select('select id from users where phone =? and password=?',[$phone,$password]);
-    if (count($data)){
-        echo 'success';
+    if(Auth::attempt(['phone' => request('phone'), 'password' => request('password')])){
+        $user = Auth::user();
+        $success['token'] =  $user->createToken('MyApp')->accessToken;
+        return response()->json(['success' => $success], $this->successStatus);
     }
     else{
-        echo "error";
+        return response()->json(['error'=>'Unauthorised'], 401);
     }
 });
 
