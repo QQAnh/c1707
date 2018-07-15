@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Endpoint;
+namespace App\Http\Controllers;
 
-use App\User;
+use App\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class UsersController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return response()->json($user, 200);
-
+//        $product = Product::all();
+//        return view('product')->with('product' , $product);
+        return "index page";
     }
 
     /**
@@ -28,12 +27,13 @@ class UsersController extends Controller
     public function create()
     {
         //
+        return "create page";
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,39 +44,19 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return response()->json($user, 200);
-
-
-    }
-
-    public function getByPhone($phone)
-    {
-        $user = User::where('phone', $phone)->get();
-        return response()->json($user, 200);
-
-    }
-
-    public function checkLogin()
-    {
-        if (Auth::attempt(['phone' => request('phone'), 'password' => request('password')])) {
-            $user = Auth::user();
-            $user->save();
-            echo 'succsess';
-        } else {
-echo 'fales';
-        }
+        //
+        return "show by id";
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,8 +67,8 @@ echo 'fales';
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -99,7 +79,7 @@ echo 'fales';
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
