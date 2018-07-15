@@ -68,21 +68,24 @@ Route::resource('orderdetail', 'Endpoint\OrderDetailsController');
 Route::get('/products/category/{id}','Endpoint\ProductsController@getByCategory');
 Route::get('/products/{title}','Endpoint\ProductsController@search');
 Route::get('/userphone/{phone}','Endpoint\UsersController@getByPhone');
-Route::post('/login','Endpoint\UsersController@checkLogin');
-//Route::post('login', function (Request $request) {
-//
-//    if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-//        // Authentication passed...
-//        $user = auth()->user();
-//        $user->save();
-//        return $user;
-//    }
-//
-//    return response()->json([
-//        'error' => 'Unauthenticated user',
-//        'code' => 401,
-//    ], 401);
-//});
+//Route::post('/login','Endpoint\UsersController@checkLogin');
+Route::post('login', function (Request $request) {
+
+    if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+        // Authentication passed...
+        $user = auth()->user();
+        $user->save();
+        return response([
+            'status' => Response::HTTP_OK,
+            'response_time' => microtime(true) - LARAVEL_START,
+            'user' => $user
+        ],Response::HTTP_OK);    }
+
+    return response()->json([
+        'error' => 'Unauthenticated user',
+        'code' => 401,
+    ], 401);
+});
 
 
 
