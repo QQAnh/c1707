@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Endpoint;
 
-use App\Product;
+use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ProductsController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-//        $product = Product::all();
-//        return view('product')->with('product' , $product);
-        return "index page";
+        $user = User::all();
+        return response()->json($user, 200);
+
     }
 
     /**
@@ -27,13 +28,12 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        return "create page";
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,19 +44,39 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
-        return "show by id";
+        $user = User::find($id);
+        return response()->json($user, 200);
+
+
+    }
+
+    public function getByPhone($phone)
+    {
+        $user = User::where('phone', $phone)->get();
+        return response()->json($user, 200);
+
+    }
+
+    public function checkLogin()
+    {
+        if (Auth::attempt(['phone' => request('phone'), 'password' => request('password')])) {
+            $user = Auth::user();
+            $user->save();
+            echo 'succsess';
+        } else {
+            echo 'fales';
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -67,8 +87,8 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -79,7 +99,7 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
